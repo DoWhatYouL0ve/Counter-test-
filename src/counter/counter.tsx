@@ -1,33 +1,29 @@
 import './counter.modules.css'
-import {useState} from "react";
-
-export const Counter = () => {
-    const [value, setValue] = useState(0)
-    const [disabledValue, setDisabledValue] = useState(true)
-
-    const newValueCounter = () => {
-        if (value < 5)  {
-            setValue(value + 1)
-            setDisabledValue(false)
-        }
-    }
-
-    const resetValueCounter = () => {
-        setValue(0)
-        setDisabledValue(true)
-    }
+import {Display} from './counterDisplay/display'
+import {Button} from "./counterButton/button";
 
 
+type CounterType = {
+    resetValueCounter: () => void
+    value: number
+    newValueCounter: () => void
+    disabledValue: boolean
+}
+
+export const Counter = (props: CounterType) => {
 
     return (
         <div className={'wrapper'}>
-            <div className={'amount'}>
-                <h2 className={value === 5 ? 'red' : undefined}>{value}</h2>
-            </div>
+            <Display value={props.value}/>
             <div className={'buttonWrapper'}>
-                <button onClick={newValueCounter}>Raise</button>
-                <button onClick={resetValueCounter} disabled={disabledValue}>Reset</button>
+                <Button onClick={props.newValueCounter}
+                        //disabledValue={props.disabledValue}
+                        title={'Raise'}/>
+                <Button onClick={props.resetValueCounter}
+                        disabledValue={props.disabledValue}
+                        title={'Reset'}/>
             </div>
+
         </div>
     )
 }

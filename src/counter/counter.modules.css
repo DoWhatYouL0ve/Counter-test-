@@ -3,22 +3,12 @@
     width: 150px;
     height: 150px;
     margin: auto;
-    background-color: orange;
+    background-color: darkslateblue;
     border-radius: 10px;
-}
-
-.amount {
-    margin: 20px auto;
-    background-color: white;
-    width: 30px;
 }
 
 .buttonWrapper {
     margin-top: 50px;
-}
-
-button {
-    margin: 0 10px;
 }
 
 .red {
