@@ -17,7 +17,7 @@ export const Counter = (props: CounterType) => {
             <Display value={props.value}/>
             <div className={'buttonWrapper'}>
                 <Button onClick={props.newValueCounter}
-                        //disabledValue={props.disabledValue}
+                        disabledValue={props.value === 5? true : false}
                         title={'Raise'}/>
                 <Button onClick={props.resetValueCounter}
                         disabledValue={props.disabledValue}
