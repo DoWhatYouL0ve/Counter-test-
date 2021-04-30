@@ -1,0 +1,28 @@
+.wrapper {
+    border: 5px solid red;
+    width: 150px;
+    height: 150px;
+    margin: auto;
+    background-color: darkslateblue;
+    border-radius: 10px;
+}
+
+.chooseValueWrapper {
+    padding: 0 5px;
+    height: 60px;
+    margin: 20px 0;
+}
+
+.valueWrapper input {
+    width: 40px;
+}
+
+.valueWrapper {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputError {
+    background-color: red;
+}

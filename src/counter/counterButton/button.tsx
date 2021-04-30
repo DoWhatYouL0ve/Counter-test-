@@ -1,4 +1,4 @@
-import './button.modules.css'
+import s from './button.module.css'
 
 type ButtonType = {
     onClick: () => void
@@ -8,6 +8,6 @@ type ButtonType = {
 
 export const Button = (props: ButtonType) => {
     return (
-        <button onClick={props.onClick} disabled={props.disabledValue}>{props.title}</button>
+        <button className={s.button} onClick={props.onClick} disabled={props.disabledValue}>{props.title}</button>
     )
 }

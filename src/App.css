@@ -2,3 +2,9 @@
   text-align: center;
   padding-top: 100px;
 }
+
+.counterWrapper {
+  margin: 0 auto;
+  display: flex;
+  width: 600px;
+}
