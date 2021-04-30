@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {Counter} from "./counter/counter";
 import {SetCounterRange} from './counter/setCounterRange/setCounterRange'
@@ -8,16 +8,16 @@ import {SetCounterRange} from './counter/setCounterRange/setCounterRange'
 function App() {
 
     // code to set the range for the counter
-    const [rangeValueStart, setRangeValueStart] = useState(0)
-    const [rangeValueMax, setRangeValueMax] = useState(1)
-    const [rangeSetDisabled, setRangeSetDisabled] = useState(true)
-    const [onFocusError, setOnFocusError] = useState(false)
+    const [rangeValueStart, setRangeValueStart] = useState<number>(0)
+    const [rangeValueMax, setRangeValueMax] = useState<number>(1)
+    const [rangeSetDisabled, setRangeSetDisabled] = useState<boolean>(true)
+    const [onFocusError, setOnFocusError] = useState<boolean>(false)
 
     // code for the counter
     let [value, setValue] = useState<number>(0)
     const [disabledValue, setDisabledValue] = useState<boolean>(true)
 
-    let [maxCounterValue, setMaxCounterValue] = useState(5)
+    let [maxCounterValue, setMaxCounterValue] = useState<number>(5)
 
     const newValueCounter = () => {
         if (value < maxCounterValue)  {
@@ -54,6 +54,32 @@ function App() {
     }
 
     const setGoodRange = rangeValueStart >= 0 && rangeValueMax > rangeValueStart
+
+    // localStorage
+
+    useEffect( () => {
+        let getFromLocalStorageMinValue = localStorage.getItem('minValue')
+
+        if (getFromLocalStorageMinValue) {
+            let newValueMin = JSON.parse(getFromLocalStorageMinValue)
+            setRangeValueStart(newValueMin)
+            setValue(newValueMin)
+        }
+
+    }, [])
+
+    useEffect( () => {
+        let getFromLocalStorageMaxValue = localStorage.getItem('maxValue')
+        if (getFromLocalStorageMaxValue) {
+            let newValueMax = JSON.parse(getFromLocalStorageMaxValue)
+            setRangeValueMax(newValueMax)
+        }
+    }, [])
+
+    useEffect( () => {
+        localStorage.setItem('minValue', JSON.stringify(rangeValueStart))
+        localStorage.setItem('maxValue', JSON.stringify(rangeValueMax))
+    }, [rangeValueStart, rangeValueMax])
 
 
 

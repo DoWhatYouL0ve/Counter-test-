@@ -1,14 +1,19 @@
+
 .display {
-    margin: 20px auto;
-    background-color: white;
-    width: 30px;
+    font-weight: bold;
+    font-size: 30px;
 }
+
 
 .red {
     color: red;
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .error {
     width: 100%;
     background-color: darkslateblue;
+    font-weight: bold;
+    font-size: 30px
 }

@@ -17,14 +17,16 @@ export const Counter = (props: CounterType) => {
 
     return (
         <div className={s.wrapper}>
-            <Display value={props.value}
-                     maxCounterValue={props.maxCounterValue}
-                     setGoodRange={props.setGoodRange}
-                     rangeSetDisabled={props.rangeSetDisabled}
-            />
+            <div className={s.displayWrapper}>
+                <Display value={props.value}
+                         maxCounterValue={props.maxCounterValue}
+                         setGoodRange={props.setGoodRange}
+                         rangeSetDisabled={props.rangeSetDisabled}
+                />
+            </div>
             <div className={s.buttonWrapper}>
                 <Button onClick={props.newValueCounter}
-                        disabledValue={props.value === props.maxCounterValue}
+                        disabledValue={props.value === props.maxCounterValue || !props.rangeSetDisabled}
                         title={'Raise'}/>
                 <Button onClick={props.resetValueCounter}
                         disabledValue={props.disabledValue}

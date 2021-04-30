@@ -8,6 +8,9 @@ type ButtonType = {
 
 export const Button = (props: ButtonType) => {
     return (
-        <button className={s.button} onClick={props.onClick} disabled={props.disabledValue}>{props.title}</button>
+        <div>
+            <button className={s.button} onClick={props.onClick} disabled={props.disabledValue}>{props.title}</button>
+        </div>
+
     )
 }

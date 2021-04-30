@@ -15,7 +15,7 @@ export const Display = (props: DisplayType) => {
         <div>
             {props.setGoodRange && props.rangeSetDisabled?
                 (<div className={s.display}>
-                    <h2 className={props.value === props.maxCounterValue ? s.red : undefined}>{props.value}</h2>
+                    <span className={props.value === props.maxCounterValue ? s.red : undefined}>{props.value}</span>
                 </div>) : props.setGoodRange && !props.rangeSetDisabled ?
                     (<div className={s.error}><p>enter values and press "set"</p></div>) :
                     (<div className={s.error}><p className={s.red}>Incorrect value</p></div>)}
