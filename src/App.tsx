@@ -4,7 +4,15 @@ import {Counter} from "./counter/counter";
 import {SetCounterRange} from './counter/setCounterRange/setCounterRange'
 
 
+
 function App() {
+
+    // code to set the range for the counter
+    const [rangeValueStart, setRangeValueStart] = useState(0)
+    const [rangeValueMax, setRangeValueMax] = useState(1)
+    const [rangeSetDisabled, setRangeSetDisabled] = useState(true)
+    const [onFocusError, setOnFocusError] = useState(false)
+
     // code for the counter
     let [value, setValue] = useState<number>(0)
     const [disabledValue, setDisabledValue] = useState<boolean>(true)
@@ -19,14 +27,11 @@ function App() {
     }
 
     const resetValueCounter = () => {
-        setValue(0)
+        setValue(rangeValueStart)
         setDisabledValue(true)
     }
 
     // code to set the range for the counter
-    const [rangeValueStart, setRangeValueStart] = useState(0)
-    const [rangeValueMax, setRangeValueMax] = useState(1)
-    const [rangeSetDisabled, setRangeSetDisabled] = useState(false)
 
     const onChangeMax = (body: number) => {
         setRangeValueMax(body)
@@ -44,6 +49,10 @@ function App() {
         setRangeSetDisabled(true)
     }
 
+    const onFocus = () => {
+        setOnFocusError(true)
+    }
+
     const setGoodRange = rangeValueStart >= 0 && rangeValueMax > rangeValueStart
 
 
@@ -58,6 +67,8 @@ function App() {
                                setRange={setRange}
                                setGoodRange={setGoodRange}
                                rangeSetDisabled={rangeSetDisabled}
+                               onFocus={onFocus}
+                               onFocusError={onFocusError}
               />
               <Counter resetValueCounter={resetValueCounter}
                        value={value}
@@ -65,6 +76,7 @@ function App() {
                        disabledValue={disabledValue}
                        maxCounterValue={maxCounterValue}
                        setGoodRange={setGoodRange}
+                       rangeSetDisabled={rangeSetDisabled}
               />
           </div>
 

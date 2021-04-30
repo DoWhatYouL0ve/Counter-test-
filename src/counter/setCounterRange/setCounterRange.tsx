@@ -10,6 +10,8 @@ type SetCounterRangeType = {
     setRange: () => void
     setGoodRange: boolean
     rangeSetDisabled: boolean
+    onFocus: () => void
+    onFocusError: boolean
 }
 
 export const SetCounterRange = (props: SetCounterRangeType) => {
@@ -29,11 +31,11 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
             <div className={s.chooseValueWrapper}>
                 <div className={s.valueWrapper}>
                     <b>max value: </b>
-                    <input type={'number'} value={props.rangeValueMax} className={props.rangeValueMax <= props.rangeValueStart? s.inputError : undefined} onChange={onChangeMax}/>
+                    <input type={'number'} value={props.rangeValueMax} className={props.onFocusError && props.rangeValueMax <= props.rangeValueStart? s.inputError : undefined} onChange={onChangeMax} onFocus={props.onFocus}/>
                 </div>
                 <div className={s.valueWrapper}>
                     <b>start value: </b>
-                    <input type={'number'} value={props.rangeValueStart} className={props.rangeValueStart >= props.rangeValueMax || props.rangeValueStart < 0 ? s.inputError : undefined} onChange={onChangeStart}/>
+                    <input type={'number'} value={props.rangeValueStart} className={props.onFocusError && (props.rangeValueStart >= props.rangeValueMax || props.rangeValueStart) < 0 ? s.inputError : undefined} onChange={onChangeStart} onFocus={props.onFocus}/>
                 </div>
             </div>
 

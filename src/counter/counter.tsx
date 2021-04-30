@@ -10,6 +10,7 @@ type CounterType = {
     disabledValue: boolean
     maxCounterValue: number
     setGoodRange: boolean
+    rangeSetDisabled: boolean
 }
 
 export const Counter = (props: CounterType) => {
@@ -19,10 +20,11 @@ export const Counter = (props: CounterType) => {
             <Display value={props.value}
                      maxCounterValue={props.maxCounterValue}
                      setGoodRange={props.setGoodRange}
+                     rangeSetDisabled={props.rangeSetDisabled}
             />
             <div className={s.buttonWrapper}>
                 <Button onClick={props.newValueCounter}
-                        disabledValue={props.value === props.maxCounterValue? true : false}
+                        disabledValue={props.value === props.maxCounterValue}
                         title={'Raise'}/>
                 <Button onClick={props.resetValueCounter}
                         disabledValue={props.disabledValue}
