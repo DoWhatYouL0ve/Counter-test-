@@ -73,6 +73,7 @@ function App() {
         if (getFromLocalStorageMaxValue) {
             let newValueMax = JSON.parse(getFromLocalStorageMaxValue)
             setRangeValueMax(newValueMax)
+            setMaxCounterValue(newValueMax)
         }
     }, [])
 
