@@ -1,57 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {Counter} from "./counter/counter";
 import {SetCounterRange} from './counter/setCounterRange/setCounterRange'
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootStateType} from "./counter/store/store";
+import {
+    setMaxCounterValueAC,
+    setRangeValueMaxAC,
+    setRangeValueStartAC, setValueAC
+} from "./counter/store/counter-reducer";
 
 
 
 function App() {
 
-    // code to set the range for the counter
-    const [rangeValueStart, setRangeValueStart] = useState<number>(0)
-    const [rangeValueMax, setRangeValueMax] = useState<number>(1)
-    const [rangeSetDisabled, setRangeSetDisabled] = useState<boolean>(true)
-    const [onFocusError, setOnFocusError] = useState<boolean>(false)
-
-    // code for the counter
-    let [value, setValue] = useState<number>(0)
-    const [disabledValue, setDisabledValue] = useState<boolean>(true)
-
-    let [maxCounterValue, setMaxCounterValue] = useState<number>(5)
-
-    const newValueCounter = () => {
-        if (value < maxCounterValue)  {
-            setValue(value + 1)
-            setDisabledValue(false)
-        }
-    }
-
-    const resetValueCounter = () => {
-        setValue(rangeValueStart)
-        setDisabledValue(true)
-    }
-
-    // code to set the range for the counter
-
-    const onChangeMax = (body: number) => {
-        setRangeValueMax(body)
-        setRangeSetDisabled(false)
-    }
-
-    const onChangeStart = (body: number) => {
-        setRangeValueStart(body)
-        setRangeSetDisabled(false)
-    }
-
-    const setRange = () => {
-        setValue(rangeValueStart)
-        setMaxCounterValue(rangeValueMax)
-        setRangeSetDisabled(true)
-    }
-
-    const onFocus = () => {
-        setOnFocusError(true)
-    }
+    const dispatch = useDispatch()
+    const rangeValueStart = useSelector<AppRootStateType, number>(state => state.counterReducer.rangeValueStart)
+    const rangeValueMax = useSelector<AppRootStateType, number>(state => state.counterReducer.rangeValueMax)
 
     const setGoodRange = rangeValueStart >= 0 && rangeValueMax > rangeValueStart
 
@@ -62,20 +27,20 @@ function App() {
 
         if (getFromLocalStorageMinValue) {
             let newValueMin = JSON.parse(getFromLocalStorageMinValue)
-            setRangeValueStart(newValueMin)
-            setValue(newValueMin)
+            dispatch(setRangeValueStartAC(newValueMin))
+            dispatch(setValueAC(newValueMin))
         }
 
-    }, [])
+    }, [dispatch])
 
     useEffect( () => {
         let getFromLocalStorageMaxValue = localStorage.getItem('maxValue')
         if (getFromLocalStorageMaxValue) {
             let newValueMax = JSON.parse(getFromLocalStorageMaxValue)
-            setRangeValueMax(newValueMax)
-            setMaxCounterValue(newValueMax)
+            dispatch(setRangeValueMaxAC(newValueMax))
+            dispatch(setMaxCounterValueAC(newValueMax))
         }
-    }, [])
+    }, [dispatch])
 
     useEffect( () => {
         localStorage.setItem('minValue', JSON.stringify(rangeValueStart))
@@ -87,23 +52,9 @@ function App() {
   return (
       <div className="App">
           <div className={'counterWrapper'}>
-              <SetCounterRange rangeValueStart={rangeValueStart}
-                               rangeValueMax={rangeValueMax}
-                               onChangeMax={onChangeMax}
-                               onChangeStart={onChangeStart}
-                               setRange={setRange}
-                               setGoodRange={setGoodRange}
-                               rangeSetDisabled={rangeSetDisabled}
-                               onFocus={onFocus}
-                               onFocusError={onFocusError}
+              <SetCounterRange setGoodRange={setGoodRange}
               />
-              <Counter resetValueCounter={resetValueCounter}
-                       value={value}
-                       newValueCounter={newValueCounter}
-                       disabledValue={disabledValue}
-                       maxCounterValue={maxCounterValue}
-                       setGoodRange={setGoodRange}
-                       rangeSetDisabled={rangeSetDisabled}
+              <Counter setGoodRange={setGoodRange}
               />
           </div>
 
