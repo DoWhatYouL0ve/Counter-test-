@@ -4,13 +4,14 @@ import {Button} from "./counterButton/button";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./store/store";
 import {setDisabledValueAC, setValueAC} from "./store/counter-reducer";
+import React from "react";
 
 
 type CounterType = {
     setGoodRange: boolean
 }
 
-export const Counter = (props: CounterType) => {
+export const Counter = React.memo((props: CounterType) => {
 
     const dispatch = useDispatch()
     const rangeSetDisabled = useSelector<AppRootStateType, boolean>(state => state.counterReducer.rangeSetDisabled)
@@ -51,4 +52,4 @@ export const Counter = (props: CounterType) => {
 
         </div>
     )
-}
+})

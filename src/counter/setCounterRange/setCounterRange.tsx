@@ -1,4 +1,4 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, memo} from "react";
 import s from './setCounterRange.module.css'
 import {Button} from "../counterButton/button";
 import {useDispatch, useSelector} from "react-redux";
@@ -15,7 +15,7 @@ type SetCounterRangeType = {
     setGoodRange: boolean
 }
 
-export const SetCounterRange = (props: SetCounterRangeType) => {
+export const SetCounterRange = memo((props: SetCounterRangeType) => {
 
     const dispatch = useDispatch()
     const rangeValueStart = useSelector<AppRootStateType, number>(state => state.counterReducer.rangeValueStart)
@@ -66,4 +66,4 @@ export const SetCounterRange = (props: SetCounterRangeType) => {
             </div>
         </div>
     )
-}
+})
